@@ -1,5 +1,10 @@
 package main.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -11,7 +16,9 @@ public class Customer   {
 
   private String lastName = null;
 
-  private LocalDate birthdate = null;
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
+  protected LocalDate birthdate;
 
   private String country = null;
 
@@ -24,6 +31,10 @@ public class Customer   {
   private CustomerStatus customerStatus = null;
 
   private Address address = null;
+
+  public Customer() {
+    birthdate = null;
+  }
 
   public String getNumber() {
     return number;

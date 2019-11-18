@@ -1,6 +1,10 @@
 package main.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.time.LocalDate;
@@ -14,6 +18,8 @@ public class Customer   {
 
   private String lastName = null;
 
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
   private LocalDate birthdate = null;
 
   private String country = null;
@@ -134,13 +140,16 @@ public class Customer   {
     return Objects.hash(number, firstName, lastName, birthdate, country, countryCode, mobileNumber, email, customerStatus, address);
   }
 
-  @Override
-  public  String toString(){
-    try {
-      return new ObjectMapper().writeValueAsString(this);
-    } catch (Exception e){}
-    return  null;
-  }
+//  @Override
+//  public  String toString(){
+//    try {
+//      return new ObjectMapper().writeValueAsString(this);
+//    } catch (Exception e){}
+//    return  null;
+//  }
+
+
+
 //
 //  @Override
 //  public String toString() {

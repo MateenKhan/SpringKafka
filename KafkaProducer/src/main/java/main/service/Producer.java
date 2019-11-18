@@ -1,6 +1,7 @@
 package main.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import main.model.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,10 @@ public class Producer {
         this.kafkaTemplate.send(TOPIC, message);
     }
 
-    public void sendMessage(Customer customer) {
-        logger.info(String.format("$$ -> Producing message --> %s", customer.toString()));
+    public void sendMessage(Customer customer) throws  Exception {
+        String customerStr = new ObjectMapper().writeValueAsString(customer);
+        logger.info(String.format("$$ -> Producing message --> %s", customerStr));
 
-        this.kafkaTemplate.send(TOPIC, customer.toString());
+        this.kafkaTemplate.send(TOPIC, customerStr);
     }
 }

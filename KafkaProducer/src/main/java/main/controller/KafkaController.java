@@ -17,7 +17,7 @@ public class KafkaController {
     }
 
     @PostMapping(value = "/publish")
-    public void sendMessageToKafkaTopic(@RequestBody Customer customer) {
+    public void sendMessageToKafkaTopic(@RequestBody Customer customer) throws  Exception{
         this.producer.sendMessage(customer);
     }
 }

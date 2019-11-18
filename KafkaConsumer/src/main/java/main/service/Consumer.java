@@ -17,11 +17,12 @@ public class Consumer {
 
 
     @KafkaListener(topics = "users", groupId = "group_id")
-    public void consume(String message) throws  Exception{
-
-        logger.info(String.format("$$ -> Consumed Message -> %s", message));
-        Customer customer = objectMapper.readValue(message, Customer.class);
+    public void consume(String customerStr) throws  Exception{
+//        logger.info(customer.getBirthdate()./**/);
+        logger.info(String.format("$$ -> Consumed Message -> %s", customerStr));
+//        Customer customer = objectMapper.readValue(message, Customer.class);
 //        logger.info(String.format("message is :", customer.toString()));
-        logger.info(customer.getBirthdate().getYear()+"");
+        Customer customer = new ObjectMapper().readValue(customerStr, Customer.class);
+        logger.info(customer.getBirthdate()+"");
     }
 }
