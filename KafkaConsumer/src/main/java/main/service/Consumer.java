@@ -18,10 +18,7 @@ public class Consumer {
 
     @KafkaListener(topics = "users", groupId = "group_id")
     public void consume(String customerStr) throws  Exception{
-//        logger.info(customer.getBirthdate()./**/);
         logger.info(String.format("$$ -> Consumed Message -> %s", customerStr));
-//        Customer customer = objectMapper.readValue(message, Customer.class);
-//        logger.info(String.format("message is :", customer.toString()));
         Customer customer = new ObjectMapper().readValue(customerStr, Customer.class);
         logger.info(customer.getBirthdate()+"");
     }
